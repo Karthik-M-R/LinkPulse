@@ -1,0 +1,91 @@
+/**
+ * =========================
+ * MONGOOSE – QUICK SUMMARY
+ * =========================
+ *
+ * Mongoose is an ODM (Object Data Modeling) library for MongoDB.
+ * MongoDB itself is schema-less, but Mongoose enforces structure
+ * at the application level using Schemas and Models.
+ *
+ * -------------------------
+ * SCHEMA
+ * -------------------------
+ * Schema = Blueprint of a document.
+ * - Defines fields, data types, validation, defaults.
+ * - Defines indexes and relationships.
+ * - Attaches middleware (pre / post hooks).
+ * - DOES NOT talk to the database.
+ *
+ * Example:
+ *   const userSchema = new Schema({ ... });
+ *
+ * -------------------------
+ * MODEL
+ * -------------------------
+ * Model = Compiled schema with database powers.
+ * - Created using mongoose.model("Name", schema).
+ * - Used to CREATE, READ, UPDATE, DELETE data in MongoDB.
+ * - One model maps to one MongoDB collection.
+ *
+ * Example:
+ *   const User = mongoose.model("User", userSchema);
+ *
+ * -------------------------
+ * SCHEMA vs MODEL (KEY IDEA)
+ * -------------------------
+ * Schema → defines WHAT the data looks like.
+ * Model  → defines HOW we interact with the database.
+ *
+ * Schema = design
+ * Model  = database interface
+ *
+ * -------------------------
+ * MONGOOSE MIDDLEWARE (HOOKS)
+ * -------------------------
+ * Middleware are functions that run automatically
+ * BEFORE or AFTER certain database actions.
+ *
+ * Common hooks:
+ * - pre('save')  → before saving a document
+ * - post('save') → after saving a document
+ *
+ * Hooks run automatically when:
+ * - Model.create()
+ * - document.save()
+ *
+ * NOTE:
+ * - pre('save') does NOT run on findOneAndUpdate().
+ *
+ * -------------------------
+ * WHY pre('save') IS USED
+ * -------------------------
+ * Used for logic that must ALWAYS happen before saving:
+ * - Password hashing
+ * - Data normalization
+ * - Auto-calculated fields
+ *
+ * -------------------------
+ * IMPORTANT RULES
+ * -------------------------
+ * - Use normal function(), NOT arrow function, in hooks
+ *   because `this` must refer to the document.
+ * - Always call next() to continue saving.
+ * - Use this.isModified('field') to avoid re-processing data.
+ *
+ * -------------------------
+ * PASSWORD HASHING FLOW
+ * -------------------------
+ * 1. User sends plain password
+ * 2. pre('save') runs
+ * 3. bcrypt generates salt
+ * 4. Password is hashed
+ * 5. Hashed password is stored in DB
+ *
+ * -------------------------
+ * EXPORT RULE
+ * -------------------------
+ * We export the MODEL (not the schema) because:
+ * - Only models can query the database.
+ * - Controllers/Services use models for DB operations.
+ */
+// Schema defines structure, Model talks to database, middleware automates data behavior.
