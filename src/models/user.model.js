@@ -11,7 +11,7 @@ const userSchema = new mongoose.Schema({
   username: { type: String, required: true, unique: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
-}, { timestamps: true });
+}, { timestamps: true });//schema
 
 // 2. The Middleware Hook (Revision)
 // We use a regular function() here, NOT an arrow function, 
@@ -32,4 +32,7 @@ userSchema.pre('save', async function (next) {
   }
 });
 
-export default mongoose.model('User', userSchema);
+export default mongoose.model('User', userSchema);//model
+
+//Schema defines the structure of documents, 
+// while a model is a compiled version of the schema used to interact with the database

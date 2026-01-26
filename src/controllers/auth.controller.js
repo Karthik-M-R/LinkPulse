@@ -24,7 +24,7 @@ export const register = async (req, res) => {
     }
 };
 
-// 2. LOGIN LOGIC (ADD THIS NOW)
+// 2. LOGIN LOGIC 
 export const login = async (req, res) => {
     try {
         const { email, password } = req.body;
