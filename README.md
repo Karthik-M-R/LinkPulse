@@ -2,6 +2,21 @@
 
 A URL shortener backend built with Node.js, Express, and MongoDB.
 
+## 🌟 What is LinkPulse?
+**LinkPulse** is a smart URL shortener service (like Bitly). It takes long, messy links and turns them into short, shareable ones. It also tracks how many people click your links!
+
+## 🚀 How the Code Works (The Flow)
+Imagine this app is a **Restaurant**:
+
+1.  **Server (`server.js`)**: The Buildling. It opens the doors and starts listening for customers (requests).
+2.  **App (`app.js`)**: The Receptionist. It greets everyone, checks security (CORS), and directs them to the right department.
+    *   If "something goes wrong", it sends them to the **Error Handler** (`error.middleware.js`).
+3.  **Routes (`routes/`)**: The Menu categories. It lists what you can ask for (e.g., `/auth` for login/signup, `/links` for shortening URLs).
+4.  **Middleware (`middlewares/`)**: The Security Guards.
+    *   `auth.middleware.js`: Checks ID cards (JWT tokens) to ensure you are logged in before you can create or delete links.
+5.  **Controllers (`controllers/`)**: The Chefs. They do the actual work—creating the link, saving it to the database, and serving the response.
+6.  **Database (`models/`)**: The Pantry. Where ingredients (User info, Links) are stored using MongoDB.
+
 ## Project Structure
 
 ```
